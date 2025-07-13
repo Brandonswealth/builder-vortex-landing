@@ -310,7 +310,7 @@ export default function Index() {
 
                   {/* Main Content with Background */}
                   <div
-                    className="relative bg-gradient-to-b from-bluesq-600 to-bluesq-800 min-h-[400px]"
+                    className="relative bg-gradient-to-b from-bluesq-600 to-bluesq-800 h-[480px]"
                     style={{
                       backgroundImage: `url('https://cdn.builder.io/api/v1/image/assets%2F73cef5d45d4148daa57a98053c90e59f%2Fb09444ed4f444a1ea02f8ce8fc4c38d8?format=webp&width=800')`,
                       backgroundSize: "cover",
