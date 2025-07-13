@@ -181,8 +181,8 @@ export default function Index() {
               </div>
             </div>
             <div className="relative flex justify-center items-center">
-              {/* iOS Device Frame */}
-              <div className="bg-gray-800 rounded-[2.5rem] p-2 shadow-2xl w-64 mx-auto transform scale-75 lg:scale-85">
+              {/* iOS Device Frame - iPhone 13 Pro Max */}
+              <div className="bg-gray-800 rounded-[2.5rem] p-2 shadow-2xl w-72 mx-auto transform scale-90 lg:scale-100">
                 <div className="bg-white rounded-[2rem] overflow-hidden">
                   {/* iOS Status Bar */}
                   <div className="bg-white px-6 py-2 flex justify-between items-center text-black text-sm font-medium">
