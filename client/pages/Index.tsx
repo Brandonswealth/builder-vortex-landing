@@ -309,7 +309,7 @@ export default function Index() {
                   </div>
 
                   {/* Main Content with Background */}
-                  <div className="relative bg-gradient-to-b from-bluesq-600 to-bluesq-800 h-[520px]">
+                  <div className="relative bg-gradient-to-b from-bluesq-600 to-bluesq-800 h-[420px]">
                     <div className="relative p-5 text-white h-full flex flex-col justify-between">
                       <div>
                         {/* BlueSQ Logo */}
