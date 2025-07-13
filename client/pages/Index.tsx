@@ -182,7 +182,7 @@ export default function Index() {
             </div>
             <div className="relative flex justify-center items-center">
               {/* iOS Device Frame */}
-              <div className="bg-gray-800 rounded-[2.5rem] p-2 shadow-2xl w-80 mx-auto transform scale-90 lg:scale-100">
+              <div className="bg-gray-800 rounded-[2.5rem] p-2 shadow-2xl w-64 mx-auto transform scale-75 lg:scale-85">
                 <div className="bg-white rounded-[2rem] overflow-hidden">
                   {/* iOS Status Bar */}
                   <div className="bg-white px-6 py-2 flex justify-between items-center text-black text-sm font-medium">
@@ -834,6 +834,32 @@ export default function Index() {
           </div>
         </div>
       </footer>
+
+      {/* AI Chat Agent */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <button className="bg-bluesq-600 hover:bg-bluesq-700 text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 group">
+          <svg
+            className="w-6 h-6 group-hover:scale-110 transition-transform"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <div className="absolute -top-2 -right-2 w-4 h-4 bg-green-500 rounded-full border-2 border-white animate-pulse"></div>
+        </button>
+
+        {/* Tooltip */}
+        <div className="absolute bottom-16 right-0 bg-gray-900 text-white text-sm px-3 py-2 rounded-lg opacity-0 hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+          Live AI Assistant
+          <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
+        </div>
+      </div>
     </div>
   );
 }
