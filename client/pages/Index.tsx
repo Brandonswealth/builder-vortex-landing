@@ -332,7 +332,7 @@ export default function Index() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <Card className="border-2 border-gray-200">
               <CardHeader className="text-center pb-8">
                 <CardTitle className="text-xl">Starter</CardTitle>
