@@ -429,6 +429,46 @@ export default function Index() {
                 </Button>
               </CardContent>
             </Card>
+
+            <Card className="border-2 border-orange-500 bg-gradient-to-br from-orange-50 to-yellow-50">
+              <CardHeader className="text-center pb-8">
+                <CardTitle className="text-xl">Premium Package</CardTitle>
+                <CardDescription>Custom solutions & add-ons</CardDescription>
+                <div className="mt-4">
+                  <span className="text-2xl font-bold text-orange-600">
+                    Custom
+                  </span>
+                  <p className="text-sm text-gray-600 mt-1">
+                    Contact for pricing
+                  </p>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                  <span>Everything in Enterprise</span>
+                </div>
+                <div className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                  <span>Custom add-ons</span>
+                </div>
+                <div className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                  <span>White-label solutions</span>
+                </div>
+                <div className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                  <span>Enterprise SLA</span>
+                </div>
+                <div className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                  <span>Priority support</span>
+                </div>
+                <Button className="w-full mt-6 bg-orange-600 hover:bg-orange-700 text-white">
+                  Contact Sales
+                </Button>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
