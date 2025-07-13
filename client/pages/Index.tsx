@@ -320,70 +320,72 @@ export default function Index() {
                   >
                     <div className="absolute inset-0 bg-bluesq-600/80"></div>
 
-                    <div className="relative p-6 text-white">
-                      {/* BlueSQ Logo */}
-                      <div className="mb-8 flex justify-center">
-                        <img
-                          src="https://cdn.builder.io/api/v1/assets/73cef5d45d4148daa57a98053c90e59f/group-3-ebd4f7?format=webp&width=800"
-                          alt="BlueSQ Logo"
-                          className="h-8 w-auto brightness-0 invert"
-                        />
-                      </div>
-
-                      {/* Main Heading */}
-                      <div className="text-center mb-8">
-                        <h1 className="text-2xl font-bold mb-2">
-                          Find Your Next
-                        </h1>
-                        <h1 className="text-2xl font-bold mb-4">
-                          Construction Project
-                        </h1>
-                        <p className="text-sm text-white/90">
-                          Start by selecting your project location and type.
-                        </p>
-                      </div>
-
-                      {/* Search Form */}
-                      <div className="space-y-4">
-                        <div className="relative">
-                          <input
-                            type="text"
-                            placeholder="Enter a city, county or zip"
-                            className="w-full px-4 py-3 rounded-full bg-white text-gray-900 placeholder-gray-500 text-sm border-2 border-white focus:outline-none focus:border-blue-300"
+                    <div className="relative p-5 text-white h-full flex flex-col justify-between">
+                      <div>
+                        {/* BlueSQ Logo */}
+                        <div className="mb-6 flex justify-center">
+                          <img
+                            src="https://cdn.builder.io/api/v1/assets/73cef5d45d4148daa57a98053c90e59f/group-3-ebd4f7?format=webp&width=800"
+                            alt="BlueSQ Logo"
+                            className="h-7 w-auto brightness-0 invert"
                           />
                         </div>
 
-                        <div className="relative">
-                          <input
-                            type="text"
-                            placeholder="What type of project?"
-                            className="w-full px-4 py-3 rounded-full bg-white text-gray-900 placeholder-gray-500 text-sm border-2 border-white focus:outline-none focus:border-blue-300"
-                          />
+                        {/* Main Heading */}
+                        <div className="text-center mb-6">
+                          <h1 className="text-xl font-bold mb-1">
+                            Find Your Next
+                          </h1>
+                          <h1 className="text-xl font-bold mb-3">
+                            Construction Project
+                          </h1>
+                          <p className="text-xs text-white/90 px-2">
+                            Start by selecting your project location and type.
+                          </p>
                         </div>
 
-                        <div className="flex justify-center">
-                          <button className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white font-semibold py-3 px-8 rounded-full flex items-center space-x-2 shadow-lg">
-                            <svg
-                              className="w-5 h-5"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                              />
-                            </svg>
-                            <span>Search</span>
-                          </button>
+                        {/* Search Form */}
+                        <div className="space-y-3 px-2">
+                          <div className="relative">
+                            <input
+                              type="text"
+                              placeholder="Enter a city, county or zip"
+                              className="w-full px-4 py-2.5 rounded-full bg-white text-gray-900 placeholder-gray-500 text-xs border-2 border-white focus:outline-none focus:border-blue-300"
+                            />
+                          </div>
+
+                          <div className="relative">
+                            <input
+                              type="text"
+                              placeholder="What type of project?"
+                              className="w-full px-4 py-2.5 rounded-full bg-white text-gray-900 placeholder-gray-500 text-xs border-2 border-white focus:outline-none focus:border-blue-300"
+                            />
+                          </div>
+
+                          <div className="flex justify-center pt-2">
+                            <button className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white font-semibold py-2.5 px-6 rounded-full flex items-center space-x-2 shadow-lg text-sm">
+                              <svg
+                                className="w-4 h-4"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                                />
+                              </svg>
+                              <span>Search</span>
+                            </button>
+                          </div>
                         </div>
                       </div>
 
                       {/* Search by Strategy */}
-                      <div className="mt-8 text-center">
-                        <p className="text-white font-semibold text-lg">
+                      <div className="text-center pb-4">
+                        <p className="text-white font-semibold text-base">
                           Search by Strategy
                         </p>
                       </div>
