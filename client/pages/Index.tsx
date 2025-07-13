@@ -181,35 +181,147 @@ export default function Index() {
               </div>
             </div>
             <div className="relative">
-              <div className="bg-white rounded-2xl shadow-2xl p-8">
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-semibold">Current Projects</h3>
-                    <Badge className="bg-green-100 text-green-800">Live</Badge>
+              {/* iOS Device Frame */}
+              <div className="bg-black rounded-[3rem] p-2 shadow-2xl max-w-sm mx-auto">
+                <div className="bg-white rounded-[2.5rem] overflow-hidden">
+                  {/* iOS Status Bar */}
+                  <div className="bg-white px-6 py-2 flex justify-between items-center text-black text-sm font-medium">
+                    <span>9:41</span>
+                    <div className="flex items-center space-x-1">
+                      <div className="flex space-x-1">
+                        <div className="w-1 h-1 bg-black rounded-full"></div>
+                        <div className="w-1 h-1 bg-black rounded-full"></div>
+                        <div className="w-1 h-1 bg-black rounded-full"></div>
+                        <div className="w-1 h-1 bg-gray-300 rounded-full"></div>
+                      </div>
+                      <svg
+                        className="w-6 h-3 ml-1"
+                        viewBox="0 0 24 12"
+                        fill="none"
+                      >
+                        <rect
+                          x="1"
+                          y="3"
+                          width="18"
+                          height="6"
+                          rx="2"
+                          stroke="black"
+                          strokeWidth="1"
+                          fill="none"
+                        />
+                        <rect
+                          x="20"
+                          y="5"
+                          width="2"
+                          height="2"
+                          rx="0.5"
+                          fill="black"
+                        />
+                      </svg>
+                    </div>
                   </div>
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                      <div>
-                        <p className="font-medium">Downtown Office Complex</p>
-                        <p className="text-sm text-gray-500">Phase 2 of 3</p>
-                      </div>
-                      <div className="text-right">
-                        <p className="text-green-600 font-semibold">On Track</p>
-                        <p className="text-sm text-gray-500">87% Complete</p>
+
+                  {/* iOS App Header */}
+                  <div className="bg-bluesq-600 px-6 py-4">
+                    <div className="flex items-center justify-between">
+                      <h1 className="text-white text-xl font-semibold">
+                        Current Projects
+                      </h1>
+                      <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+                        <span className="text-white text-lg">+</span>
                       </div>
                     </div>
-                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                      <div>
-                        <p className="font-medium">Residential Tower</p>
-                        <p className="text-sm text-gray-500">Foundation</p>
+                  </div>
+
+                  {/* iOS App Content */}
+                  <div className="p-4 space-y-3 bg-gray-50 min-h-[400px]">
+                    {/* Project Card 1 */}
+                    <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-10 h-10 bg-bluesq-100 rounded-lg flex items-center justify-center">
+                            <Building2 className="w-5 h-5 text-bluesq-600" />
+                          </div>
+                          <div>
+                            <p className="font-semibold text-gray-900">
+                              Downtown Office
+                            </p>
+                            <p className="text-sm text-gray-500">
+                              Phase 2 of 3
+                            </p>
+                          </div>
+                        </div>
+                        <Badge className="bg-green-100 text-green-800 text-xs">
+                          On Track
+                        </Badge>
                       </div>
-                      <div className="text-right">
-                        <p className="text-orange-600 font-semibold">
+                      <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
+                        <div
+                          className="bg-green-500 h-2 rounded-full"
+                          style={{ width: "87%" }}
+                        ></div>
+                      </div>
+                      <p className="text-xs text-gray-500">87% Complete</p>
+                    </div>
+
+                    {/* Project Card 2 */}
+                    <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                            <Building2 className="w-5 h-5 text-orange-600" />
+                          </div>
+                          <div>
+                            <p className="font-semibold text-gray-900">
+                              Residential Tower
+                            </p>
+                            <p className="text-sm text-gray-500">Foundation</p>
+                          </div>
+                        </div>
+                        <Badge className="bg-orange-100 text-orange-800 text-xs">
                           2 Days Behind
-                        </p>
-                        <p className="text-sm text-gray-500">23% Complete</p>
+                        </Badge>
                       </div>
+                      <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
+                        <div
+                          className="bg-orange-500 h-2 rounded-full"
+                          style={{ width: "23%" }}
+                        ></div>
+                      </div>
+                      <p className="text-xs text-gray-500">23% Complete</p>
                     </div>
+
+                    {/* Project Card 3 */}
+                    <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <Building2 className="w-5 h-5 text-blue-600" />
+                          </div>
+                          <div>
+                            <p className="font-semibold text-gray-900">
+                              Shopping Center
+                            </p>
+                            <p className="text-sm text-gray-500">Planning</p>
+                          </div>
+                        </div>
+                        <Badge className="bg-blue-100 text-blue-800 text-xs">
+                          Starting Soon
+                        </Badge>
+                      </div>
+                      <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
+                        <div
+                          className="bg-blue-500 h-2 rounded-full"
+                          style={{ width: "5%" }}
+                        ></div>
+                      </div>
+                      <p className="text-xs text-gray-500">5% Complete</p>
+                    </div>
+                  </div>
+
+                  {/* iOS Home Indicator */}
+                  <div className="bg-white pb-2 flex justify-center">
+                    <div className="w-32 h-1 bg-gray-300 rounded-full"></div>
                   </div>
                 </div>
               </div>
