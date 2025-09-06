@@ -29,6 +29,7 @@ import {
 
 export default function Index() {
   const [activeFeature, setActiveFeature] = useState(0);
+  const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">("monthly");
 
   const features = [
     {
@@ -87,6 +88,58 @@ export default function Index() {
       company: "Chen Development",
       text: "Finally, a construction management platform that actually understands our industry. Highly recommended!",
       rating: 5,
+    },
+  ];
+
+  const discountRate = 0.25;
+  const plans = [
+    {
+      name: "Basic",
+      description: "For solo entrepreneurs",
+      monthly: 39,
+      badge: null as string | null,
+      features: [
+        "Project management & scheduling",
+        "1 user + 2 collaborators",
+        "Core analytics & reporting",
+        "Email support",
+      ],
+    },
+    {
+      name: "Grow",
+      description: "For small teams",
+      monthly: 105,
+      badge: "Most Popular",
+      features: [
+        "Everything in Basic",
+        "5 users + 10 collaborators",
+        "Advanced analytics",
+        "Priority chat support",
+      ],
+    },
+    {
+      name: "Advanced",
+      description: "As your business scales",
+      monthly: 399,
+      badge: null as string | null,
+      features: [
+        "Everything in Grow",
+        "Unlimited projects & locations",
+        "Custom integrations",
+        "Enhanced support (SLA)",
+      ],
+    },
+    {
+      name: "Plus",
+      description: "For more complex businesses",
+      monthly: null as number | null,
+      badge: null as string | null,
+      features: [
+        "Priority onboarding",
+        "Dedicated success manager",
+        "Security reviews & SSO",
+        "Custom contracts & pricing",
+      ],
     },
   ];
 
@@ -554,152 +607,173 @@ export default function Index() {
       {/* Pricing Section */}
       <section id="pricing" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Simple, transparent pricing
+          <div className="text-center mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+              Find a plan to power your growth
             </h2>
-            <p className="text-xl text-gray-600">
-              Choose the plan that fits your business size and needs
+            <p className="text-lg text-gray-600">
+              Pay monthly or yearly and save 25%
             </p>
           </div>
 
+          <div className="flex justify-center mb-12">
+            <div className="inline-flex rounded-full border border-gray-200 bg-gray-100 p-1">
+              <button
+                onClick={() => setBillingCycle("monthly")}
+                className={`px-4 py-1.5 text-sm rounded-full transition-colors ${
+                  billingCycle === "monthly"
+                    ? "bg-white shadow text-gray-900"
+                    : "text-gray-600 hover:text-gray-900"
+                }`}
+                aria-pressed={billingCycle === "monthly"}
+              >
+                Pay monthly
+              </button>
+              <button
+                onClick={() => setBillingCycle("yearly")}
+                className={`px-4 py-1.5 text-sm rounded-full transition-colors ${
+                  billingCycle === "yearly"
+                    ? "bg-white shadow text-gray-900"
+                    : "text-gray-600 hover:text-gray-900"
+                }`}
+                aria-pressed={billingCycle === "yearly"}
+              >
+                Pay yearly <span className="ml-1 text-green-600">(save 25%)</span>
+              </button>
+            </div>
+          </div>
+
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <Card className="border-2 border-gray-200">
-              <CardHeader className="text-center pb-8">
-                <CardTitle className="text-xl">Starter</CardTitle>
-                <CardDescription>Perfect for small contractors</CardDescription>
-                <div className="mt-4">
-                  <span className="text-4xl font-bold">$49</span>
-                  <span className="text-gray-600">/month</span>
-                </div>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                  <span>Up to 5 projects</span>
-                </div>
-                <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                  <span>5 team members</span>
-                </div>
-                <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                  <span>Basic reporting</span>
-                </div>
-                <Button className="w-full mt-6" variant="outline">
-                  Start Free Trial
-                </Button>
-              </CardContent>
-            </Card>
+            {plans.map((plan) => {
+              const isPlus = plan.monthly === null;
+              const monthlyPrice = plan.monthly ?? 0;
+              const displayPrice =
+                billingCycle === "monthly"
+                  ? monthlyPrice
+                  : Math.round(monthlyPrice * (1 - discountRate));
+              return (
+                <Card
+                  key={plan.name}
+                  className={`relative border-2 ${
+                    plan.badge ? "border-bluesq-600" : "border-gray-200"
+                  }`}
+                >
+                  {plan.badge && (
+                    <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-bluesq-600">
+                      {plan.badge}
+                    </Badge>
+                  )}
+                  <CardHeader className="text-center pb-6">
+                    <CardTitle className="text-xl">{plan.name}</CardTitle>
+                    <CardDescription>{plan.description}</CardDescription>
+                    <div className="mt-4 min-h-[40px]">
+                      {isPlus ? (
+                        <div>
+                          <span className="text-2xl font-bold">Contact sales</span>
+                        </div>
+                      ) : (
+                        <div>
+                          <span className="text-4xl font-bold">${""}{displayPrice}</span>
+                          <span className="text-gray-600">/month</span>
+                          {billingCycle === "yearly" && (
+                            <p className="text-xs text-green-600 mt-1">Billed yearly</p>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    {plan.features.map((f) => (
+                      <div key={f} className="flex items-center">
+                        <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                        <span>{f}</span>
+                      </div>
+                    ))}
+                    {isPlus ? (
+                      <Button className="w-full mt-6" variant="outline">
+                        Contact Sales
+                      </Button>
+                    ) : (
+                      <Button
+                        className={`w-full mt-6 ${
+                          plan.badge ? "bg-bluesq-600 hover:bg-bluesq-700" : ""
+                        }`}
+                      >
+                        Get Started
+                      </Button>
+                    )}
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
 
-            <Card className="border-2 border-bluesq-600 relative">
-              <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-bluesq-600">
-                Most Popular
-              </Badge>
-              <CardHeader className="text-center pb-8">
-                <CardTitle className="text-xl">Professional</CardTitle>
-                <CardDescription>
-                  For growing construction companies
-                </CardDescription>
-                <div className="mt-4">
-                  <span className="text-4xl font-bold">$99</span>
-                  <span className="text-gray-600">/month</span>
-                </div>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                  <span>Unlimited projects</span>
-                </div>
-                <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                  <span>25 team members</span>
-                </div>
-                <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                  <span>Advanced analytics</span>
-                </div>
-                <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                  <span>Mobile app</span>
-                </div>
-                <Button className="w-full mt-6 bg-bluesq-600 hover:bg-bluesq-700">
-                  Start Free Trial
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 border-gray-200">
-              <CardHeader className="text-center pb-8">
-                <CardTitle className="text-xl">Enterprise</CardTitle>
-                <CardDescription>For large construction firms</CardDescription>
-                <div className="mt-4">
-                  <span className="text-4xl font-bold">$199</span>
-                  <span className="text-gray-600">/month</span>
-                </div>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                  <span>Everything in Professional</span>
-                </div>
-                <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                  <span>Unlimited team members</span>
-                </div>
-                <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                  <span>Custom integrations</span>
-                </div>
-                <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                  <span>Dedicated support</span>
-                </div>
-                <Button className="w-full mt-6" variant="outline">
-                  Contact Sales
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 border-orange-500 bg-gradient-to-br from-orange-50 to-yellow-50">
-              <CardHeader className="text-center pb-8">
-                <CardTitle className="text-xl">Premium Package</CardTitle>
-                <CardDescription>Custom solutions & add-ons</CardDescription>
-                <div className="mt-4">
-                  <span className="text-2xl font-bold text-orange-600">
-                    Custom
-                  </span>
-                  <p className="text-sm text-gray-600 mt-1">
-                    Contact for pricing
-                  </p>
-                </div>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                  <span>Everything in Enterprise</span>
-                </div>
-                <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                  <span>Custom add-ons</span>
-                </div>
-                <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                  <span>White-label solutions</span>
-                </div>
-                <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                  <span>Enterprise SLA</span>
-                </div>
-                <div className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                  <span>Priority support</span>
-                </div>
-                <Button className="w-full mt-6 bg-orange-600 hover:bg-orange-700 text-white">
-                  Contact Sales
-                </Button>
-              </CardContent>
-            </Card>
+          <div className="mt-16">
+            <div className="grid lg:grid-cols-3 gap-8 items-stretch">
+              <div className="lg:col-span-2">
+                <Card className="h-full border-2 border-orange-500 bg-gradient-to-br from-orange-50 to-yellow-50">
+                  <CardHeader className="pb-4">
+                    <CardTitle className="text-xl">Advertising & Brand Visibility</CardTitle>
+                    <CardDescription>
+                      Promote your brand across BlueSQ Radio, partner websites, and social media.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="flex items-center">
+                      <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                      <span>On-air mentions on BlueSQ Radio up to 4× per day</span>
+                    </div>
+                    <div className="flex items-center">
+                      <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                      <span>Featured placements across partner websites</span>
+                    </div>
+                    <div className="flex items-center">
+                      <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                      <span>Social amplification on Facebook, X, and LinkedIn</span>
+                    </div>
+                    <div className="flex items-center">
+                      <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                      <span>Creative assistance for copy and assets</span>
+                    </div>
+                    <div className="flex items-center">
+                      <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                      <span>Monthly performance reporting</span>
+                    </div>
+                    <div className="mt-4">
+                      <Button className="bg-orange-600 hover:bg-orange-700 text-white">Promote my brand</Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+              <div>
+                <Card className="h-full">
+                  <CardHeader className="text-center pb-4">
+                    <CardTitle className="text-xl">Add‑on Pricing</CardTitle>
+                    <CardDescription>Bundle and save</CardDescription>
+                    <div className="mt-4">
+                      <span className="text-3xl font-bold">${""}{
+                        billingCycle === "monthly"
+                          ? 499
+                          : Math.round(499 * (1 - discountRate))
+                      }</span>
+                      <span className="text-gray-600">/month</span>
+                      {billingCycle === "yearly" && (
+                        <p className="text-xs text-green-600 mt-1">Billed yearly</p>
+                      )}
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-gray-600 text-center">
+                      Available as an add‑on to any plan. Cancel anytime.
+                    </p>
+                    <Button className="w-full mt-6" variant="outline">Contact Sales</Button>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+            <p className="text-xs text-gray-500 mt-6 text-center">
+              *Yearly discount available on select plans
+            </p>
           </div>
         </div>
       </section>
