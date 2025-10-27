@@ -250,7 +250,7 @@ export default function Index() {
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-7 bg-black rounded-b-3xl z-10"></div>
 
                     {/* Status Bar */}
-                    <div className="bg-bluesq-50 px-6 py-3 flex justify-between items-center text-black text-xs font-semibold pt-8">
+                    <div className="bg-white px-6 py-3 flex justify-between items-center text-black text-xs font-semibold pt-8">
                       <span>9:41</span>
                       <div className="flex items-center gap-1">
                         <svg className="w-4 h-3" fill="currentColor" viewBox="0 0 24 24">
@@ -265,99 +265,138 @@ export default function Index() {
                       </div>
                     </div>
 
-                    {/* App Header */}
-                    <div className="bg-gradient-to-r from-bluesq-600 to-bluesq-700 px-4 py-4 text-white">
-                      <div className="flex items-center justify-between mb-2">
-                        <h2 className="text-lg font-bold">BlueSQ</h2>
-                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
-                        </svg>
-                      </div>
-                      <p className="text-xs text-bluesq-100">Projects & Collaboration</p>
+                    {/* URL Bar */}
+                    <div className="bg-gray-100 px-6 py-2 text-center">
+                      <span className="text-xs text-gray-600">🔒 app.bluesq.pro</span>
                     </div>
 
-                    {/* Main Content */}
-                    <div className="bg-gray-50 px-4 py-4 h-96 overflow-y-auto">
-                      {/* Active Project Card */}
-                      <div className="bg-white rounded-lg p-3 mb-3 border-l-4 border-bluesq-600 shadow-sm">
-                        <div className="flex items-start justify-between mb-2">
-                          <div>
-                            <h3 className="font-semibold text-sm text-gray-900">Downtown Renovation</h3>
-                            <p className="text-xs text-gray-500">Est. completion: Mar 15</p>
+                    {/* Main Content with Background */}
+                    <div className="relative bg-gradient-to-b from-bluesq-600 to-bluesq-800 min-h-[480px] flex flex-col">
+                      <div className="relative p-4 text-white h-full flex flex-col justify-between">
+                        <div>
+                          {/* BlueSQ Logo */}
+                          <div className="mb-6 flex justify-center pt-2">
+                            <img
+                              src="https://cdn.builder.io/api/v1/assets/73cef5d45d4148daa57a98053c90e59f/group-3-ebd4f7?format=webp&width=800"
+                              alt="BlueSQ Logo"
+                              className="h-7 w-auto brightness-0 invert"
+                            />
                           </div>
-                          <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">On Track</span>
-                        </div>
-                        <div className="w-full bg-gray-200 rounded-full h-1.5">
-                          <div className="bg-green-500 h-1.5 rounded-full" style={{ width: '72%' }}></div>
-                        </div>
-                        <p className="text-xs text-gray-600 mt-1">72% Complete</p>
-                      </div>
 
-                      {/* Team Members */}
-                      <div className="mb-4">
-                        <p className="text-xs font-semibold text-gray-700 mb-2">Team</p>
-                        <div className="flex gap-2">
-                          <div className="w-8 h-8 rounded-full bg-bluesq-600 flex items-center justify-center text-white text-xs font-bold">J</div>
-                          <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-xs font-bold">M</div>
-                          <div className="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center text-white text-xs font-bold">S</div>
-                          <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-gray-600 text-xs font-bold">+3</div>
-                        </div>
-                      </div>
+                          {/* Main Heading */}
+                          <div className="text-center mb-6">
+                            <h1 className="text-lg font-bold mb-1">Find Your Next</h1>
+                            <h1 className="text-lg font-bold mb-3">Construction Project</h1>
+                            <p className="text-xs text-white/90 px-2">
+                              Start by selecting your project location and type.
+                            </p>
+                          </div>
 
-                      {/* Quick Stats */}
-                      <div className="grid grid-cols-2 gap-2 mb-3">
-                        <div className="bg-white rounded p-2 text-center">
-                          <p className="text-lg font-bold text-bluesq-600">$245K</p>
-                          <p className="text-xs text-gray-600">Budget</p>
-                        </div>
-                        <div className="bg-white rounded p-2 text-center">
-                          <p className="text-lg font-bold text-bluesq-600">18/22</p>
-                          <p className="text-xs text-gray-600">Tasks</p>
-                        </div>
-                      </div>
+                          {/* Search Form */}
+                          <div className="space-y-2 px-2">
+                            <div className="relative">
+                              <input
+                                type="text"
+                                placeholder="Enter a city, county or zip"
+                                className="w-full px-3 py-2 rounded-full bg-white text-gray-900 placeholder-gray-500 text-xs border-2 border-white focus:outline-none focus:border-blue-300"
+                              />
+                            </div>
 
-                      {/* Action Buttons */}
-                      <div className="space-y-2">
-                        <button className="w-full bg-bluesq-600 text-white py-2 rounded text-sm font-semibold">
-                          View Details
-                        </button>
-                        <button className="w-full bg-gray-200 text-gray-900 py-2 rounded text-sm font-semibold">
-                          Add Update
-                        </button>
+                            <div className="relative">
+                              <input
+                                type="text"
+                                placeholder="What type of project?"
+                                className="w-full px-3 py-2 rounded-full bg-white text-gray-900 placeholder-gray-500 text-xs border-2 border-white focus:outline-none focus:border-blue-300"
+                              />
+                            </div>
+
+                            <div className="flex justify-center pt-2">
+                              <button className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white font-semibold py-2 px-6 rounded-full flex items-center space-x-2 shadow-lg text-xs">
+                                <svg
+                                  className="w-4 h-4"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                                  />
+                                </svg>
+                                <span>Search</span>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Search by Strategy */}
+                        <div className="text-center pb-4">
+                          <p className="text-white font-semibold text-xs">Search by Strategy</p>
+                        </div>
                       </div>
                     </div>
 
-                    {/* Tab Bar */}
-                    <div className="bg-white border-t border-gray-200 px-4 py-2 flex justify-around items-center">
-                      <div className="flex flex-col items-center gap-1">
-                        <svg className="w-6 h-6 text-bluesq-600" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5z" />
-                        </svg>
-                        <span className="text-xs text-bluesq-600 font-semibold">Home</span>
-                      </div>
-                      <div className="flex flex-col items-center gap-1">
-                        <svg className="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" />
-                        </svg>
-                        <span className="text-xs text-gray-400">Projects</span>
-                      </div>
-                      <div className="flex flex-col items-center gap-1">
-                        <svg className="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-                        </svg>
-                        <span className="text-xs text-gray-400">Tasks</span>
-                      </div>
-                      <div className="flex flex-col items-center gap-1">
-                        <svg className="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                        </svg>
-                        <span className="text-xs text-gray-400">Team</span>
-                      </div>
+                    {/* Bottom Section */}
+                    <div className="bg-white p-2">
+                      <h3 className="text-sm font-semibold text-gray-900 text-center">
+                        My Saved Projects
+                      </h3>
                     </div>
 
-                    {/* Home Indicator */}
+                    {/* iOS Safari Navigation */}
+                    <div className="bg-gray-100 px-3 py-2 flex justify-between items-center">
+                      <svg
+                        className="w-5 h-5 text-gray-600"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M15 19l-7-7 7-7"
+                        />
+                      </svg>
+                      <svg
+                        className="w-5 h-5 text-gray-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                      <div className="w-6 h-6 bg-gray-300 rounded flex items-center justify-center">
+                        <span className="text-gray-600 text-xs">+</span>
+                      </div>
+                      <div className="w-6 h-6 bg-gray-300 rounded flex items-center justify-center">
+                        <span className="text-gray-600 text-xs font-bold">4</span>
+                      </div>
+                      <svg
+                        className="w-5 h-5 text-gray-600"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M5 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                    </div>
+
+                    {/* iOS Home Indicator */}
                     <div className="bg-white pb-2 flex justify-center">
-                      <div className="w-32 h-1 bg-black rounded-full"></div>
+                      <div className="w-32 h-1 bg-gray-300 rounded-full"></div>
                     </div>
                   </div>
                 </div>
