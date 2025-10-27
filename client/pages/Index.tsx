@@ -170,6 +170,12 @@ export default function Index() {
                 Pricing
               </a>
               <a
+                href="/about"
+                className="text-gray-700 hover:text-bluesq-600 transition-colors"
+              >
+                About
+              </a>
+              <a
                 href="#testimonials"
                 className="text-gray-700 hover:text-bluesq-600 transition-colors"
               >
@@ -740,7 +746,7 @@ export default function Index() {
                       <span>Monthly performance reporting</span>
                     </div>
                     <div className="mt-4">
-                      <Button className="bg-orange-600 hover:bg-orange-700 text-white">Promote my brand</Button>
+                      <Button className="bg-orange-600 hover:bg-orange-700 text-white" disabled>Coming soon</Button>
                     </div>
                   </CardContent>
                 </Card>
