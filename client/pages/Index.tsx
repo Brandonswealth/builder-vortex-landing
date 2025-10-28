@@ -1,12 +1,4 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import {
   Building2,
   Calendar,
@@ -15,12 +7,20 @@ import {
   FileText,
   BarChart3,
   CheckCircle,
-  Zap,
+  Star,
   Shield,
+  Zap,
   Target,
+  Clock,
+  ArrowRight,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 export default function Index() {
+  const [activeFeature, setActiveFeature] = useState(0);
+  const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">("monthly");
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -45,49 +45,117 @@ export default function Index() {
       icon: Building2,
       title: "Project Management",
       description:
-        "Complete visibility into every project from bidding through completion. Track timelines, budgets, and team performance in real-time.",
+        "Streamline your construction projects from planning to completion with intelligent workflow automation.",
     },
-    {
-      icon: Users,
-      title: "Field Coordination",
-      description:
-        "Connect your field teams with office staff. Share daily reports, communicate instantly, and keep everyone aligned.",
-    },
-    {
-      icon: DollarSign,
-      title: "Financial Control",
-      description:
-        "Real-time cost tracking, budget forecasting, and profit margin analysis. Know your numbers at any moment.",
-    },
-  ];
-
-  const capabilities = [
     {
       icon: Calendar,
       title: "Smart Scheduling",
-      description: "AI-powered schedules that adapt to resources and constraints",
+      description:
+        "AI-powered scheduling that adapts to weather, resource availability, and project dependencies.",
     },
     {
-      icon: BarChart3,
-      title: "Real-time Forecasting",
-      description: "Predictive analytics for project completion and profitability",
+      icon: DollarSign,
+      title: "Cost Control",
+      description:
+        "Real-time budget tracking and cost forecasting to keep your projects profitable.",
+    },
+    {
+      icon: Users,
+      title: "Team Collaboration",
+      description:
+        "Connect field teams, office staff, and stakeholders with seamless communication tools.",
     },
     {
       icon: FileText,
-      title: "Document Hub",
-      description: "Centralized storage for all plans, permits, and contracts",
+      title: "Document Management",
+      description:
+        "Centralized storage for blueprints, permits, contracts, and all project documentation.",
     },
     {
-      icon: Target,
-      title: "Performance Insights",
-      description: "Dashboards and reports that drive better decisions",
+      icon: BarChart3,
+      title: "Analytics & Reporting",
+      description:
+        "Powerful insights and custom reports to optimize performance and identify opportunities.",
+    },
+  ];
+
+  const testimonials = [
+    {
+      name: "Sarah Johnson",
+      company: "Johnson Construction Co.",
+      text: "BlueSQ transformed how we manage projects. We've seen 30% faster completion times and significantly better profit margins.",
+      rating: 5,
+    },
+    {
+      name: "Mike Rodriguez",
+      company: "Rodriguez Builders",
+      text: "The scheduling features alone have saved us thousands in overtime costs. This software pays for itself.",
+      rating: 5,
+    },
+    {
+      name: "Lisa Chen",
+      company: "Chen Development",
+      text: "Finally, a construction management platform that actually understands our industry. Highly recommended!",
+      rating: 5,
+    },
+  ];
+
+  const discountRate = 0.25;
+  const plans = [
+    {
+      name: "Basic",
+      description: "For solo entrepreneurs",
+      monthly: 39,
+      badge: null as string | null,
+      features: [
+        "Project management & scheduling",
+        "1 user + 2 collaborators",
+        "Core analytics & reporting",
+        "Email support",
+      ],
+    },
+    {
+      name: "Grow",
+      description: "For small teams",
+      monthly: 105,
+      badge: "Most Popular",
+      features: [
+        "Everything in Basic",
+        "5 users + 10 collaborators",
+        "Advanced analytics",
+        "Priority chat support",
+      ],
+    },
+    {
+      name: "Advanced",
+      description: "As your business scales",
+      monthly: 399,
+      badge: null as string | null,
+      features: [
+        "Everything in Grow",
+        "Unlimited projects & locations",
+        "Custom integrations",
+        "Enhanced support (SLA)",
+      ],
+    },
+    {
+      name: "Plus",
+      description: "For more complex businesses",
+      monthly: null as number | null,
+      badge: null as string | null,
+      features: [
+        "Priority onboarding",
+        "Dedicated success manager",
+        "Security reviews & SSO",
+        "Custom contracts & pricing",
+      ],
     },
   ];
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Header Navigation */}
-      <header className="border-b border-gray-200 bg-white sticky top-0 z-50">
+      {/* Navigation */}
+      <nav className="border-b border-gray-200 bg-white/95 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
@@ -97,55 +165,62 @@ export default function Index() {
                 className="h-8 w-auto"
               />
             </div>
-            <nav className="hidden md:flex items-center space-x-8">
-              <a href="#features" className="text-gray-700 hover:text-gray-900">
+            <div className="hidden md:flex items-center space-x-8">
+              <a href="#features" className="text-gray-700 hover:text-bluesq-600 transition-colors">
                 Features
               </a>
-              <a href="#capabilities" className="text-gray-700 hover:text-gray-900">
-                Capabilities
+              <a href="#pricing" className="text-gray-700 hover:text-bluesq-600 transition-colors">
+                Pricing
               </a>
-              <a href="#contact" className="text-gray-700 hover:text-gray-900">
-                Contact
-              </a>
-              <a href="/about" className="text-gray-700 hover:text-gray-900">
+              <a href="/about" className="text-gray-700 hover:text-bluesq-600 transition-colors">
                 About
               </a>
-            </nav>
-            <div className="flex items-center space-x-4">
-              <button className="text-gray-700 hover:text-gray-900 font-medium">
+              <a href="#testimonials" className="text-gray-700 hover:text-bluesq-600 transition-colors">
+                Testimonials
+              </a>
+              <a href="#contact" className="text-gray-700 hover:text-bluesq-600 transition-colors">
+                Contact
+              </a>
+              <Button variant="outline" size="sm">
                 Sign In
-              </button>
-              <button className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold px-6 py-2 rounded-full">
+              </Button>
+              <Button size="sm" className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold">
                 Get Started
-              </button>
+              </Button>
             </div>
           </div>
         </div>
-      </header>
+      </nav>
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-b from-yellow-50 to-white py-24">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative bg-gradient-to-br from-yellow-50 to-white py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <div className="mb-6">
-                <span className="inline-block bg-yellow-100 text-yellow-900 px-4 py-1 rounded-full text-sm font-semibold mb-4">
-                  Built by Contractors, For Contractors
-                </span>
+                <Badge className="bg-yellow-100 text-yellow-900 hover:bg-yellow-200">
+                  #1 Construction Management Platform
+                </Badge>
               </div>
               <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-                Construction Software That Actually Works
+                Building Made <span className="text-bluesq-600">Smart</span>
               </h1>
               <p className="text-xl text-gray-600 mb-8">
-                Manage projects, coordinate teams, control costs, and make better decisions—all in one platform built on AWS infrastructure for reliability and scale.
+                Transform your construction business with intelligent project management, real-time collaboration, and AI-powered insights that drive profitability.
               </p>
-              <button className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-4 px-8 rounded-full text-lg shadow-lg">
-                Get Started Free
-              </button>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button size="lg" className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold">
+                  Start Free Trial
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+                <Button size="lg" variant="outline">
+                  Watch Demo
+                </Button>
+              </div>
             </div>
             <div className="relative flex justify-center items-center">
               {/* Classic iPhone Frame */}
-              <div className="relative w-80">
+              <div className="relative w-72 mx-auto">
                 <div className="bg-black rounded-[3rem] p-3 shadow-2xl">
                   <div className="bg-white rounded-[2.5rem] overflow-hidden">
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-7 bg-black rounded-b-3xl z-10"></div>
@@ -157,47 +232,52 @@ export default function Index() {
                         </svg>
                       </div>
                     </div>
-                    <div className="bg-gradient-to-b from-yellow-400 to-yellow-500 min-h-[480px] flex flex-col p-4 text-white">
+                    <div className="bg-gradient-to-b from-bluesq-600 to-bluesq-800 min-h-[480px] flex flex-col p-4 text-white">
                       <div className="flex flex-col justify-between h-full">
                         <div>
                           <div className="mb-6 flex justify-center pt-2">
                             <img
                               src="https://cdn.builder.io/api/v1/assets/73cef5d45d4148daa57a98053c90e59f/group-3-ebd4f7?format=webp&width=800"
                               alt="BlueSQ Logo"
-                              className="h-7 w-auto brightness-0"
+                              className="h-7 w-auto brightness-0 invert"
                             />
                           </div>
                           <div className="text-center mb-6">
-                            <h2 className="text-lg font-bold mb-3">Your Projects</h2>
-                            <p className="text-xs text-yellow-900 opacity-90">
-                              All your active work in one place
+                            <h2 className="text-lg font-bold mb-3">Find Your Next Construction Project</h2>
+                            <p className="text-xs text-white/90">
+                              Start by selecting your project location and type.
                             </p>
                           </div>
-                          <div className="space-y-3 px-2">
-                            <div className="bg-white/20 backdrop-blur rounded-lg p-3">
-                              <div className="flex items-center justify-between mb-2">
-                                <h3 className="font-semibold text-sm">Downtown Tower</h3>
-                                <span className="text-xs bg-green-400 text-green-900 px-2 py-1 rounded-full">72%</span>
-                              </div>
-                              <div className="w-full bg-white/30 rounded-full h-1.5">
-                                <div className="bg-green-400 h-1.5 rounded-full" style={{ width: '72%' }}></div>
-                              </div>
-                            </div>
-                            <div className="bg-white/20 backdrop-blur rounded-lg p-3">
-                              <div className="flex items-center justify-between mb-2">
-                                <h3 className="font-semibold text-sm">Main St Renovation</h3>
-                                <span className="text-xs bg-blue-400 text-blue-900 px-2 py-1 rounded-full">45%</span>
-                              </div>
-                              <div className="w-full bg-white/30 rounded-full h-1.5">
-                                <div className="bg-blue-400 h-1.5 rounded-full" style={{ width: '45%' }}></div>
-                              </div>
+                          <div className="space-y-2 px-2">
+                            <input
+                              type="text"
+                              placeholder="Enter a city, county or zip"
+                              className="w-full px-3 py-2 rounded-full bg-white text-gray-900 placeholder-gray-500 text-xs border-2 border-white"
+                            />
+                            <input
+                              type="text"
+                              placeholder="What type of project?"
+                              className="w-full px-3 py-2 rounded-full bg-white text-gray-900 placeholder-gray-500 text-xs border-2 border-white"
+                            />
+                            <div className="flex justify-center pt-2">
+                              <button className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-2 px-6 rounded-full flex items-center space-x-2 text-xs">
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                                <span>Search</span>
+                              </button>
                             </div>
                           </div>
                         </div>
                         <div className="text-center pb-4">
-                          <p className="text-xs font-semibold">See all projects</p>
+                          <p className="text-white font-semibold text-xs">Search by Strategy</p>
                         </div>
                       </div>
+                    </div>
+                    <div className="bg-white p-2">
+                      <h3 className="text-xs font-semibold text-gray-900 text-center">
+                        My Saved Projects
+                      </h3>
                     </div>
                     <div className="bg-white pb-2 flex justify-center">
                       <div className="w-32 h-1 bg-gray-300 rounded-full"></div>
@@ -211,131 +291,257 @@ export default function Index() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="bg-gray-50 py-24">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="features" className="py-24 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Three Powerful Applications
+              Everything you need to manage construction projects
             </h2>
             <p className="text-xl text-gray-600">
-              Purpose-built for every role on your team
+              Comprehensive tools designed for modern construction teams
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-2xl p-8 border border-gray-200 hover:border-yellow-400 transition-colors"
-              >
-                <div className="w-16 h-16 bg-yellow-100 rounded-xl flex items-center justify-center mb-6">
-                  <feature.icon className="h-8 w-8 text-yellow-600" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-600">{feature.description}</p>
-              </div>
+              <Card key={index} className="border-2 border-transparent hover:border-yellow-400 transition-all">
+                <CardHeader>
+                  <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4">
+                    <feature.icon className="h-6 w-6 text-yellow-600" />
+                  </div>
+                  <CardTitle>{feature.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600">{feature.description}</p>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Capabilities Section */}
-      <section id="capabilities" className="bg-white py-24">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-16">
+      {/* Testimonials Section */}
+      <section id="testimonials" className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Intelligence That Works for You
+              Trusted by construction leaders
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl">
-              Intelligent features built throughout BlueSQ to help you make smarter decisions, faster.
+            <p className="text-xl text-gray-600">
+              See how BlueSQ is transforming construction businesses
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {capabilities.map((item, index) => (
-              <div
-                key={index}
-                className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-6 border border-gray-200"
-              >
-                <item.icon className="h-8 w-8 text-yellow-600 mb-4" />
-                <h3 className="text-lg font-bold text-gray-900 mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-sm text-gray-600">{item.description}</p>
-              </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <Card key={index} className="border-2 border-gray-200">
+                <CardHeader>
+                  <div className="flex mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                    ))}
+                  </div>
+                  <CardDescription className="text-gray-700 font-normal mb-4">
+                    "{testimonial.text}"
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="font-semibold text-gray-900">{testimonial.name}</p>
+                  <p className="text-sm text-gray-600">{testimonial.company}</p>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Why BlueSQ Section */}
-      <section className="bg-gray-50 py-24">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">
-            Why Construction Teams Choose BlueSQ
-          </h2>
+      {/* Pricing Section */}
+      <section id="pricing" className="py-24 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-3">
+              Find a plan to power your growth
+            </h2>
+            <p className="text-lg text-gray-600">
+              Pay monthly or yearly and save 25%
+            </p>
+          </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="flex gap-4">
-              <div className="flex-shrink-0">
-                <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-yellow-400 text-gray-900">
-                  <Zap className="h-6 w-6" />
-                </div>
+          <div className="flex justify-center mb-12">
+            <div className="inline-flex rounded-full border border-gray-200 bg-gray-100 p-1">
+              <button
+                onClick={() => setBillingCycle("monthly")}
+                className={`px-4 py-1.5 text-sm rounded-full transition-colors ${
+                  billingCycle === "monthly"
+                    ? "bg-white shadow text-gray-900"
+                    : "text-gray-600 hover:text-gray-900"
+                }`}
+              >
+                Pay monthly
+              </button>
+              <button
+                onClick={() => setBillingCycle("yearly")}
+                className={`px-4 py-1.5 text-sm rounded-full transition-colors ${
+                  billingCycle === "yearly"
+                    ? "bg-white shadow text-gray-900"
+                    : "text-gray-600 hover:text-gray-900"
+                }`}
+              >
+                Pay yearly <span className="ml-1 text-green-600">(save 25%)</span>
+              </button>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {plans.map((plan) => {
+              const isPlus = plan.monthly === null;
+              const monthlyPrice = plan.monthly ?? 0;
+              const displayPrice =
+                billingCycle === "monthly"
+                  ? monthlyPrice
+                  : Math.round(monthlyPrice * (1 - discountRate));
+              return (
+                <Card
+                  key={plan.name}
+                  className={`relative border-2 ${
+                    plan.badge ? "border-bluesq-600" : "border-gray-200"
+                  }`}
+                >
+                  {plan.badge && (
+                    <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-bluesq-600">
+                      {plan.badge}
+                    </Badge>
+                  )}
+                  <CardHeader className="text-center pb-6">
+                    <CardTitle className="text-xl">{plan.name}</CardTitle>
+                    <CardDescription>{plan.description}</CardDescription>
+                    <div className="mt-4 min-h-[40px]">
+                      {isPlus ? (
+                        <div>
+                          <span className="text-2xl font-bold">Contact sales</span>
+                        </div>
+                      ) : (
+                        <div>
+                          <span className="text-4xl font-bold">${displayPrice}</span>
+                          <span className="text-gray-600">/month</span>
+                          {billingCycle === "yearly" && (
+                            <p className="text-xs text-green-600 mt-1">Billed yearly</p>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    {plan.features.map((f) => (
+                      <div key={f} className="flex items-center">
+                        <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                        <span>{f}</span>
+                      </div>
+                    ))}
+                    {isPlus ? (
+                      <Button className="w-full mt-6" variant="outline">
+                        Contact Sales
+                      </Button>
+                    ) : (
+                      <Button
+                        className={`w-full mt-6 ${
+                          plan.badge ? "bg-bluesq-600 hover:bg-bluesq-700" : ""
+                        }`}
+                      >
+                        Get Started
+                      </Button>
+                    )}
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+
+          <div className="mt-16">
+            <div className="grid lg:grid-cols-3 gap-8 items-stretch">
+              <div className="lg:col-span-2">
+                <Card className="h-full border-2 border-yellow-400 bg-gradient-to-br from-yellow-50 to-orange-50">
+                  <CardHeader className="pb-4">
+                    <CardTitle className="text-xl">Advertising & Brand Visibility</CardTitle>
+                    <CardDescription>
+                      Promote your brand across BlueSQ Radio, partner websites, and social media.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="flex items-center">
+                      <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                      <span>On-air mentions on BlueSQ Radio up to 4× per day</span>
+                    </div>
+                    <div className="flex items-center">
+                      <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                      <span>Featured placements across partner websites</span>
+                    </div>
+                    <div className="flex items-center">
+                      <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                      <span>Social amplification on Facebook, X, and LinkedIn</span>
+                    </div>
+                    <div className="flex items-center">
+                      <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                      <span>Creative assistance for copy and assets</span>
+                    </div>
+                    <div className="flex items-center">
+                      <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                      <span>Monthly performance reporting</span>
+                    </div>
+                    <div className="mt-4">
+                      <Button className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold" disabled>
+                        Coming soon
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
               <div>
-                <h3 className="text-lg font-bold text-gray-900">Easy to Use</h3>
-                <p className="text-gray-600 mt-2">
-                  Intuitive interface that your team will love. No complicated setups.
-                </p>
+                <Card className="h-full">
+                  <CardHeader className="text-center pb-4">
+                    <CardTitle className="text-xl">Add‑on Pricing</CardTitle>
+                    <CardDescription>Bundle and save</CardDescription>
+                    <div className="mt-4">
+                      <span className="text-3xl font-bold">
+                        ${billingCycle === "monthly" ? 499 : Math.round(499 * (1 - discountRate))}
+                      </span>
+                      <span className="text-gray-600">/month</span>
+                      {billingCycle === "yearly" && (
+                        <p className="text-xs text-green-600 mt-1">Billed yearly</p>
+                      )}
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-gray-600 text-center">
+                      Available as an add‑on to any plan. Cancel anytime.
+                    </p>
+                    <Button className="w-full mt-6" variant="outline">
+                      Contact Sales
+                    </Button>
+                  </CardContent>
+                </Card>
               </div>
             </div>
-
-            <div className="flex gap-4">
-              <div className="flex-shrink-0">
-                <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-yellow-400 text-gray-900">
-                  <Shield className="h-6 w-6" />
-                </div>
-              </div>
-              <div>
-                <h3 className="text-lg font-bold text-gray-900">Enterprise Security</h3>
-                <p className="text-gray-600 mt-2">
-                  Built on AWS with encryption, backups, and compliance standards.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <div className="flex-shrink-0">
-                <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-yellow-400 text-gray-900">
-                  <CheckCircle className="h-6 w-6" />
-                </div>
-              </div>
-              <div>
-                <h3 className="text-lg font-bold text-gray-900">Always Evolving</h3>
-                <p className="text-gray-600 mt-2">
-                  Regular updates and new features based on contractor feedback.
-                </p>
-              </div>
-            </div>
+            <p className="text-xs text-gray-500 mt-6 text-center">
+              *Yearly discount available on select plans
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Contact / Lead Form Section */}
-      <section id="contact" className="bg-gradient-to-b from-white to-gray-50 py-24">
+      {/* Contact Section */}
+      <section id="contact" className="py-24 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               Ready to Get Started?
             </h2>
             <p className="text-xl text-gray-600">
-              Let's schedule a demo and show you how BlueSQ can transform your business.
+              Schedule a demo and let's show you how BlueSQ transforms construction operations.
             </p>
           </div>
 
-          <form className="bg-white rounded-2xl border-2 border-gray-200 p-8">
+          <form className="bg-gray-50 rounded-2xl border-2 border-gray-200 p-8">
             <div className="grid md:grid-cols-2 gap-6 mb-6">
               <div>
                 <label className="block text-sm font-semibold text-gray-900 mb-2">
@@ -346,7 +552,7 @@ export default function Index() {
                   name="firstName"
                   value={formData.firstName}
                   onChange={handleFormChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-100"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-bluesq-600 focus:ring-2 focus:ring-bluesq-100"
                   placeholder="John"
                   required
                 />
@@ -360,7 +566,7 @@ export default function Index() {
                   name="lastName"
                   value={formData.lastName}
                   onChange={handleFormChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-100"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-bluesq-600 focus:ring-2 focus:ring-bluesq-100"
                   placeholder="Smith"
                   required
                 />
@@ -377,7 +583,7 @@ export default function Index() {
                   name="email"
                   value={formData.email}
                   onChange={handleFormChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-100"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-bluesq-600 focus:ring-2 focus:ring-bluesq-100"
                   placeholder="john@company.com"
                   required
                 />
@@ -391,7 +597,7 @@ export default function Index() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleFormChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-100"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-bluesq-600 focus:ring-2 focus:ring-bluesq-100"
                   placeholder="+1 (555) 000-0000"
                   required
                 />
@@ -408,7 +614,7 @@ export default function Index() {
                   name="company"
                   value={formData.company}
                   onChange={handleFormChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-100"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-bluesq-600 focus:ring-2 focus:ring-bluesq-100"
                   placeholder="Your Construction Company"
                   required
                 />
@@ -421,7 +627,7 @@ export default function Index() {
                   name="projects"
                   value={formData.projects}
                   onChange={handleFormChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-100"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-bluesq-600 focus:ring-2 focus:ring-bluesq-100"
                   required
                 >
                   <option value="">Select an option</option>
@@ -443,7 +649,7 @@ export default function Index() {
                   name="projectValue"
                   value={formData.projectValue}
                   onChange={handleFormChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-100"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-bluesq-600 focus:ring-2 focus:ring-bluesq-100"
                   required
                 >
                   <option value="">Select an option</option>
@@ -462,7 +668,7 @@ export default function Index() {
                   name="products"
                   value={formData.products}
                   onChange={handleFormChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-100"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-bluesq-600 focus:ring-2 focus:ring-bluesq-100"
                   required
                 >
                   <option value="">Select a product</option>
@@ -483,110 +689,105 @@ export default function Index() {
                 value={formData.message}
                 onChange={handleFormChange}
                 rows={4}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-100"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-bluesq-600 focus:ring-2 focus:ring-bluesq-100"
                 placeholder="Tell us a bit about your business..."
               ></textarea>
             </div>
 
-            <button
-              type="submit"
-              className="w-full bg-gray-900 hover:bg-gray-800 text-white font-bold py-4 px-6 rounded-lg transition-colors"
-            >
+            <Button className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-4 h-auto">
               Schedule Demo
-            </button>
+            </Button>
           </form>
         </div>
       </section>
 
       {/* Footer */}
       <footer className="bg-gray-900 text-gray-400 py-12">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
-              <h3 className="text-white font-bold mb-4">Product</h3>
+              <h3 className="text-white font-semibold mb-4">Product</h3>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <a href="#features" className="hover:text-white">
+                  <a href="#features" className="hover:text-white transition-colors">
                     Features
                   </a>
                 </li>
                 <li>
-                  <a href="#capabilities" className="hover:text-white">
-                    Capabilities
+                  <a href="#pricing" className="hover:text-white transition-colors">
+                    Pricing
                   </a>
                 </li>
                 <li>
-                  <a href="#contact" className="hover:text-white">
+                  <a href="#contact" className="hover:text-white transition-colors">
                     Contact
                   </a>
                 </li>
               </ul>
             </div>
             <div>
-              <h3 className="text-white font-bold mb-4">Company</h3>
+              <h3 className="text-white font-semibold mb-4">Company</h3>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <a href="/about" className="hover:text-white">
+                  <a href="/about" className="hover:text-white transition-colors">
                     About
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white">
+                  <a href="#" className="hover:text-white transition-colors">
                     Blog
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white">
+                  <a href="#" className="hover:text-white transition-colors">
                     Careers
                   </a>
                 </li>
               </ul>
             </div>
             <div>
-              <h3 className="text-white font-bold mb-4">Resources</h3>
+              <h3 className="text-white font-semibold mb-4">Resources</h3>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <a href="#" className="hover:text-white">
+                  <a href="#" className="hover:text-white transition-colors">
                     Documentation
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white">
+                  <a href="#" className="hover:text-white transition-colors">
                     Support
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white">
+                  <a href="#" className="hover:text-white transition-colors">
                     Community
                   </a>
                 </li>
               </ul>
             </div>
             <div>
-              <h3 className="text-white font-bold mb-4">Legal</h3>
+              <h3 className="text-white font-semibold mb-4">Legal</h3>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <a href="#" className="hover:text-white">
+                  <a href="#" className="hover:text-white transition-colors">
                     Privacy Policy
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white">
+                  <a href="#" className="hover:text-white transition-colors">
                     Terms of Service
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white">
+                  <a href="#" className="hover:text-white transition-colors">
                     Security
                   </a>
                 </li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-gray-800 pt-8">
-            <p className="text-center text-sm">
-              © 2024 BlueSQ. All rights reserved.
-            </p>
+          <div className="border-t border-gray-800 pt-8 text-center">
+            <p>© 2024 BlueSQ. All rights reserved.</p>
           </div>
         </div>
       </footer>
